@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import styles from "./styles.module.scss";
 
-function AppLink({ href, children, exact }) {
+function AppLink({ href, children, exact, onClick }) {
   const router = useRouter();
   const active = exact
     ? router.pathname === href
@@ -14,7 +14,9 @@ function AppLink({ href, children, exact }) {
   return (
     <li>
       <Link href={href}>
-        <a className={className}>{children}</a>
+        <a onClick={onClick} className={className}>
+          {children}
+        </a>
       </Link>
     </li>
   );
@@ -22,6 +24,7 @@ function AppLink({ href, children, exact }) {
 
 AppLink.defaultProps = {
   exact: false,
+  href: "#",
 };
 
 export default AppLink;
