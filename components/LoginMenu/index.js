@@ -4,10 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { accountActions } from "../../state";
 
-const selector = ({ account }) => Boolean(account.user);
+import styles from "./styles.module.scss";
+
+const selector = ({ account }) => account;
 
 function LoginMenu() {
-  const loggedIn = useSelector(selector);
+  const account = useSelector(selector);
+  const loggedIn = Boolean(account.user);
 
   const dispatch = useDispatch();
 
@@ -18,6 +21,7 @@ function LoginMenu() {
   if (loggedIn) {
     return (
       <>
+        <li className={styles.greeting}>¡Hola, {account.user.email}!</li>
         <AppLink onClick={signOut}>Cerrar sesión</AppLink>
       </>
     );
